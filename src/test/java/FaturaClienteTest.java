@@ -117,4 +117,12 @@ class FaturaClienteTest {
                 () -> fatura.setCliente(null));
         assertSame(cliente, fatura.getCliente());
     }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {-0.01, Double.NaN,
+            Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY})
+    void rejeitaValoresInvalidosNoConstrutor(double valor) {
+        assertThrows(IllegalArgumentException.class,
+                () -> new FaturaCliente(7, new Cliente(1, "Ana", 10), valor));
+    }
 }
