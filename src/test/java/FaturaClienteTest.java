@@ -58,4 +58,12 @@ class FaturaClienteTest {
         assertEquals(desconto == 0 ? 200.0 : 0.0,
                 fatura.getValorComDesconto(), 0.0001);
     }
+
+    @Test
+    void usaDescontoAtualDoCliente() {
+        Cliente cliente = new Cliente(1, "Ana", 10);
+        FaturaCliente fatura = new FaturaCliente(7, cliente, 200.0);
+        cliente.setDesconto(25);
+        assertEquals(150.0, fatura.getValorComDesconto(), 0.0001);
+    }
 }
