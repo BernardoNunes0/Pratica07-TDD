@@ -49,4 +49,13 @@ class FaturaClienteTest {
         assertEquals(169.915, fatura.getValorComDesconto(), 0.000001);
         assertEquals(199.90, fatura.getValor(), 0.0001);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 100})
+    void aceitaOsLimitesDeDesconto(int desconto) {
+        FaturaCliente fatura = new FaturaCliente(7,
+                new Cliente(1, "Ana", desconto), 200.0);
+        assertEquals(desconto == 0 ? 200.0 : 0.0,
+                fatura.getValorComDesconto(), 0.0001);
+    }
 }
