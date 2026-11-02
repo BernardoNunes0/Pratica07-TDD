@@ -90,4 +90,10 @@ class FaturaClienteTest {
         assertEquals("Fatura [id=7, cliente=Ana(1)(10%), valor=250.0 ]",
                 fatura.toString());
     }
+
+    @Test
+    void permiteExibirFaturaAindaSemCliente() {
+        assertEquals("Fatura [id=7, cliente=null, valor=0.0 ]",
+                new FaturaCliente(7).toString());
+    }
 }
