@@ -13,4 +13,12 @@ class FaturaClienteTest {
         assertSame(cliente, fatura.getCliente());
         assertEquals(250.0, fatura.getValor(), 0.0001);
     }
+
+    @Test
+    void criaFaturaSomenteComId() {
+        FaturaCliente fatura = new FaturaCliente(8);
+        assertEquals(8, fatura.getId());
+        assertNull(fatura.getCliente());
+        assertEquals(0.0, fatura.getValor(), 0.0001);
+    }
 }
