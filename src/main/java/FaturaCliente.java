@@ -4,15 +4,9 @@ public class FaturaCliente {
     private double valor;
 
     public FaturaCliente(int id, Cliente cliente, double valor) {
-        this.id = id;
-        if (cliente == null) {
-            throw new IllegalArgumentException("O cliente não pode ser nulo.");
-        }
-        if (valor < 0 || Double.isNaN(valor) || Double.isInfinite(valor)) {
-            throw new IllegalArgumentException("O valor deve ser finito e não negativo.");
-        }
-        this.cliente = cliente;
-        this.valor = valor;
+        this(id);
+        setCliente(cliente);
+        setValor(valor);
     }
 
     public FaturaCliente(int id) {
