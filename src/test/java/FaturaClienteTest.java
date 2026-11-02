@@ -125,4 +125,14 @@ class FaturaClienteTest {
         assertThrows(IllegalArgumentException.class,
                 () -> new FaturaCliente(7, new Cliente(1, "Ana", 10), valor));
     }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {-0.01, Double.NaN,
+            Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY})
+    void rejeitaValoresInvalidosSemAlterarValorAnterior(double valor) {
+        FaturaCliente fatura = new FaturaCliente(7,
+                new Cliente(1, "Ana", 10), 200.0);
+        assertThrows(IllegalArgumentException.class, () -> fatura.setValor(valor));
+        assertEquals(200.0, fatura.getValor(), 0.0001);
+    }
 }
