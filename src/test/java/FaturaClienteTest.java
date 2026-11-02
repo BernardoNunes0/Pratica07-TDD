@@ -32,4 +32,13 @@ class FaturaClienteTest {
         fatura.setCliente(bruno);
         assertSame(bruno, fatura.getCliente());
     }
+
+    @Test
+    void permiteAlterarValorEUsarZero() {
+        FaturaCliente fatura = new FaturaCliente(7);
+        fatura.setValor(135.50);
+        assertEquals(135.50, fatura.getValor(), 0.0001);
+        fatura.setValor(0.0);
+        assertEquals(0.0, fatura.getValor(), 0.0001);
+    }
 }
