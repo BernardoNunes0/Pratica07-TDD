@@ -82,4 +82,12 @@ class FaturaClienteTest {
                 new Cliente(1, "Ana", 10), 0.0);
         assertEquals(0.0, fatura.getValorComDesconto(), 0.0001);
     }
+
+    @Test
+    void formataFaturaComoNoDiagrama() {
+        FaturaCliente fatura = new FaturaCliente(7,
+                new Cliente(1, "Ana", 10), 250.0);
+        assertEquals("Fatura [id=7, cliente=Ana(1)(10%), valor=250.0 ]",
+                fatura.toString());
+    }
 }
