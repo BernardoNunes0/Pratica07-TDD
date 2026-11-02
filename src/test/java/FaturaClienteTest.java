@@ -102,4 +102,10 @@ class FaturaClienteTest {
         assertThrows(IllegalStateException.class,
                 () -> new FaturaCliente(7).getValorComDesconto());
     }
+
+    @Test
+    void rejeitaClienteNuloNoConstrutorCompleto() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new FaturaCliente(7, null, 200.0));
+    }
 }
