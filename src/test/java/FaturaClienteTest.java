@@ -41,4 +41,12 @@ class FaturaClienteTest {
         fatura.setValor(0.0);
         assertEquals(0.0, fatura.getValor(), 0.0001);
     }
+
+    @Test
+    void aplicaDescontoPercentualSemAlterarValorOriginal() {
+        FaturaCliente fatura = new FaturaCliente(7,
+                new Cliente(1, "Ana", 15), 199.90);
+        assertEquals(169.915, fatura.getValorComDesconto(), 0.000001);
+        assertEquals(199.90, fatura.getValor(), 0.0001);
+    }
 }
