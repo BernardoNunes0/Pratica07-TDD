@@ -21,4 +21,15 @@ class FaturaClienteTest {
         assertNull(fatura.getCliente());
         assertEquals(0.0, fatura.getValor(), 0.0001);
     }
+
+    @Test
+    void permiteDefinirETrocarCliente() {
+        FaturaCliente fatura = new FaturaCliente(7);
+        Cliente ana = new Cliente(1, "Ana", 10);
+        Cliente bruno = new Cliente(2, "Bruno", 20);
+        fatura.setCliente(ana);
+        assertSame(ana, fatura.getCliente());
+        fatura.setCliente(bruno);
+        assertSame(bruno, fatura.getCliente());
+    }
 }
