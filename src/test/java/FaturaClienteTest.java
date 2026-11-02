@@ -96,4 +96,10 @@ class FaturaClienteTest {
         assertEquals("Fatura [id=7, cliente=null, valor=0.0 ]",
                 new FaturaCliente(7).toString());
     }
+
+    @Test
+    void naoCalculaDescontoSemCliente() {
+        assertThrows(IllegalStateException.class,
+                () -> new FaturaCliente(7).getValorComDesconto());
+    }
 }
