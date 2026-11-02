@@ -108,4 +108,13 @@ class FaturaClienteTest {
         assertThrows(IllegalArgumentException.class,
                 () -> new FaturaCliente(7, null, 200.0));
     }
+
+    @Test
+    void rejeitaClienteNuloSemPerderClienteAnterior() {
+        Cliente cliente = new Cliente(1, "Ana", 10);
+        FaturaCliente fatura = new FaturaCliente(7, cliente, 200.0);
+        assertThrows(IllegalArgumentException.class,
+                () -> fatura.setCliente(null));
+        assertSame(cliente, fatura.getCliente());
+    }
 }
