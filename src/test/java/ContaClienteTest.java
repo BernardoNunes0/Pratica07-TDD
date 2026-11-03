@@ -51,4 +51,15 @@ class ContaClienteTest {
     conta.setCliente(bruno);
     assertEquals(bruno, conta.getCliente());
     }   
+
+    @Test
+    void devePermitirAlterarSaldoInclusiveParaZero() {
+    ContaCliente conta = new ContaCliente(7);
+
+    conta.setSaldo(250.50);
+    assertEquals(250.50, conta.getSaldo(), 0.0001);
+
+    conta.setSaldo(0.0);
+    assertEquals(0.0, conta.getSaldo(), 0.0001);
+    }   
 }
