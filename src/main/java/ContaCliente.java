@@ -28,8 +28,13 @@ public class ContaCliente {
     }
 
     public void setSaldo(double saldo) {
-    this.saldo = saldo;
+    if (saldo < 0) {
+        throw new IllegalArgumentException(
+                "O saldo nao pode ser negativo.");
     }
+
+    this.saldo = saldo;
+}
 
     public ContaCliente(int id, Cliente cliente, double saldo) {
     this(id);
