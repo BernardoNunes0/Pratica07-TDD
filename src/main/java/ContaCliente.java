@@ -58,6 +58,10 @@ public class ContaCliente {
     return getSaldo();
 }
     public double subSaldo(double valor) {
+    if (valor > getSaldo()) {
+        return getSaldo();
+    }
+
     setSaldo(getSaldo() - valor);
     return getSaldo();
 }
