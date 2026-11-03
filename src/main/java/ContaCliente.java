@@ -7,6 +7,10 @@ public class ContaCliente {
         this.id = id;
     }
 
+    public ContaCliente(int id, Cliente cliente) {
+    this(id, cliente, 0.0);
+    }
+
     public int getId() {
         return id;
     }
