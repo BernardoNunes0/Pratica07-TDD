@@ -27,6 +27,10 @@ public class ContaCliente {
     this.cliente = cliente;
     }
 
+    public void setSaldo(double saldo) {
+    this.saldo = saldo;
+    }
+
     public ContaCliente(int id, Cliente cliente, double saldo) {
     this(id);
     this.cliente = cliente;
