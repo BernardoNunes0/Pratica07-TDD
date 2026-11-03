@@ -161,4 +161,19 @@ class ContaClienteTest {
     assertEquals(100.0, novoSaldo, 0.0001);
     assertEquals(100.0, conta.getSaldo(), 0.0001);
 }
+    @ParameterizedTest
+@ValueSource(doubles = {
+        Double.NaN,
+        Double.POSITIVE_INFINITY,
+        Double.NEGATIVE_INFINITY
+})
+    void deveRejeitarDepositoNaoFinitoSemAlterarSaldo(double valor) {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+    ContaCliente conta = new ContaCliente(7, cliente, 100.0);
+
+    assertThrows(IllegalArgumentException.class,
+            () -> conta.addDeposito(valor));
+
+    assertEquals(100.0, conta.getSaldo(), 0.0001);
+}
 }
