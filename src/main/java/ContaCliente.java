@@ -58,7 +58,7 @@ public class ContaCliente {
     return getSaldo();
 }
    
-public double subSaldo(double valor) {
+    public double subSaldo(double valor) {
     if (valor < 0 || Double.isNaN(valor)
             || Double.isInfinite(valor)) {
         throw new IllegalArgumentException(
@@ -74,7 +74,15 @@ public double subSaldo(double valor) {
     return getSaldo();
 }
 
-    
+    @Override
+    public String toString() {
+    return String.format(
+            java.util.Locale.US,
+            "%s(%d) saldo=R$%.2f",
+            cliente.getNome(),
+            id,
+            saldo);
+}
 
 
 }
