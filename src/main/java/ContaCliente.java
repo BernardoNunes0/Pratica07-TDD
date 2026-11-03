@@ -20,7 +20,7 @@ public class ContaCliente {
     }
 
     public ContaCliente(int id, Cliente cliente, double saldo) {
-    this.id = id;
+    this(id);
     this.cliente = cliente;
     this.saldo = saldo;
     }
