@@ -42,7 +42,8 @@ public class ContaCliente {
     this.cliente = cliente;
     setSaldo(saldo);
 }
-    public double addDeposito(double valor) {
+   
+public double addDeposito(double valor) {
     if (valor < 0) {
         throw new IllegalArgumentException(
                 "O deposito nao pode ser negativo.");
@@ -50,13 +51,11 @@ public class ContaCliente {
 
     setSaldo(getSaldo() + valor);
 
-    System.out.printf(
-            java.util.Locale.US,
-            "Novo saldo: R$%.2f%n",
-            getSaldo());
+    System.out.println("Novo saldo: " + formatarSaldo());
 
     return getSaldo();
 }
+
    
     public double subSaldo(double valor) {
     if (valor < 0 || Double.isNaN(valor)
@@ -74,14 +73,18 @@ public class ContaCliente {
     return getSaldo();
 }
 
-    @Override
-    public String toString() {
+   
+@Override
+public String toString() {
+    return cliente.getNome() + "(" + id + ") saldo=" + formatarSaldo();
+}
+
+    
+private String formatarSaldo() {
     return String.format(
             java.util.Locale.US,
-            "%s(%d) saldo=R$%.2f",
-            cliente.getNome(),
-            id,
-            saldo);
+            "R$%.2f",
+            getSaldo());
 }
 
 
