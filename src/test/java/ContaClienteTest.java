@@ -3,6 +3,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 
 class ContaClienteTest {
 
@@ -115,5 +118,27 @@ class ContaClienteTest {
 
     assertEquals(150.0, novoSaldo, 0.0001);
     assertEquals(150.0, conta.getSaldo(), 0.0001);
+}
+    @Test
+    void deveMostrarNovoSaldoAposDeposito() {
+    ContaCliente conta =
+            new ContaCliente(7, new Cliente(1, "Ana", 10), 100.0);
+
+    ByteArrayOutputStream saida = new ByteArrayOutputStream();
+    PrintStream saidaOriginal = System.out;
+    PrintStream captura = new PrintStream(saida);
+
+    try {
+        System.setOut(captura);
+
+        conta.addDeposito(50.0);
+
+        captura.flush();
+        assertEquals("Novo saldo: R$150.00",
+                saida.toString().trim());
+    } finally {
+        System.setOut(saidaOriginal);
+        captura.close();
+    }
 }
 }
