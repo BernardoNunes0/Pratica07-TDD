@@ -41,4 +41,8 @@ public class ContaCliente {
     this.cliente = cliente;
     setSaldo(saldo);
 }
+    public double addDeposito(double valor) {
+    setSaldo(getSaldo() + valor);
+    return getSaldo();
+}
 }
