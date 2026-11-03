@@ -141,4 +141,14 @@ class ContaClienteTest {
         captura.close();
     }
 }
+    @Test
+    void deveRejeitarDepositoNegativoSemAlterarSaldo() {
+    ContaCliente conta =
+            new ContaCliente(7, new Cliente(1, "Ana", 10), 100.0);
+
+    assertThrows(IllegalArgumentException.class,
+            () -> conta.addDeposito(-50.0));
+
+    assertEquals(100.0, conta.getSaldo(), 0.0001);
+}
 }
