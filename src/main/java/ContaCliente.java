@@ -58,6 +58,11 @@ public class ContaCliente {
     return getSaldo();
 }
     public double subSaldo(double valor) {
+    if (valor < 0) {
+        throw new IllegalArgumentException(
+                "O saque nao pode ser negativo.");
+    }
+
     if (valor > getSaldo()) {
         System.out.println("Saldo insuficiente!");
         return getSaldo();
@@ -66,5 +71,8 @@ public class ContaCliente {
     setSaldo(getSaldo() - valor);
     return getSaldo();
 }
+    
+
+
 }
     
