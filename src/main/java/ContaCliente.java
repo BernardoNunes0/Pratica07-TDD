@@ -57,10 +57,12 @@ public class ContaCliente {
 
     return getSaldo();
 }
-    public double subSaldo(double valor) {
-    if (valor < 0) {
+   
+public double subSaldo(double valor) {
+    if (valor < 0 || Double.isNaN(valor)
+            || Double.isInfinite(valor)) {
         throw new IllegalArgumentException(
-                "O saque nao pode ser negativo.");
+                "O saque deve ser finito e nao negativo.");
     }
 
     if (valor > getSaldo()) {
@@ -71,6 +73,7 @@ public class ContaCliente {
     setSaldo(getSaldo() - valor);
     return getSaldo();
 }
+
     
 
 
