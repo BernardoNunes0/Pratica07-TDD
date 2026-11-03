@@ -57,5 +57,9 @@ public class ContaCliente {
 
     return getSaldo();
 }
+    public double subSaldo(double valor) {
+    setSaldo(getSaldo() - valor);
+    return getSaldo();
+}
 }
     
