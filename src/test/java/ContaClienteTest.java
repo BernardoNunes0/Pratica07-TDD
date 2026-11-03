@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ContaClienteTest {
 
@@ -62,4 +63,15 @@ class ContaClienteTest {
     conta.setSaldo(0.0);
     assertEquals(0.0, conta.getSaldo(), 0.0001);
     }   
+
+    @Test
+    void deveRejeitarSaldoNegativoSemAlterarSaldoAnterior() {
+    ContaCliente conta =
+            new ContaCliente(7, new Cliente(1, "Ana", 10), 100.0);
+
+    assertThrows(IllegalArgumentException.class,
+            () -> conta.setSaldo(-1.0));
+
+    assertEquals(100.0, conta.getSaldo(), 0.0001);
+    }
 }
