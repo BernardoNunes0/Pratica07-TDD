@@ -15,7 +15,7 @@ class ContaClienteTest {
     ContaCliente conta = new ContaCliente(1);
 
     assertEquals(0.0, conta.getSaldo(), 0.0001);
-}
+    }
 
     @Test
     void deveCriarContaComClienteESaldoInformado() {
@@ -26,6 +26,16 @@ class ContaClienteTest {
     assertEquals(7, conta.getId());
     assertEquals(cliente, conta.getCliente());
     assertEquals(150.0, conta.getSaldo(), 0.0001);
-}
+    }
 
+    @Test
+    void deveCriarContaComClienteESaldoZero() {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+
+    ContaCliente conta = new ContaCliente(7, cliente);
+
+    assertEquals(7, conta.getId());
+    assertEquals(cliente, conta.getCliente());
+    assertEquals(0.0, conta.getSaldo(), 0.0001);
+    }
 }
