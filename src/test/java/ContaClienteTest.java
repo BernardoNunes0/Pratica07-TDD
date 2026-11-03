@@ -218,4 +218,14 @@ void deveManterSaldoQuandoSaqueForMaiorQueSaldoDisponivel() {
         captura.close();
     }
 }
+    @Test
+void deveRejeitarSaqueNegativoSemAlterarSaldo() {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+    ContaCliente conta = new ContaCliente(7, cliente, 100.0);
+
+    assertThrows(IllegalArgumentException.class,
+            () -> conta.subSaldo(-50.0));
+
+    assertEquals(100.0, conta.getSaldo(), 0.0001);
+}
 }
