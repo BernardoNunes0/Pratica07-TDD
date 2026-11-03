@@ -106,4 +106,14 @@ class ContaClienteTest {
     assertThrows(IllegalArgumentException.class,
             () -> new ContaCliente(7, cliente, saldo));
 }
+    @Test
+    void deveSomarDepositoAoSaldoERetornarNovoSaldo() {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+    ContaCliente conta = new ContaCliente(7, cliente, 100.0);
+
+    double novoSaldo = conta.addDeposito(50.0);
+
+    assertEquals(150.0, novoSaldo, 0.0001);
+    assertEquals(150.0, conta.getSaldo(), 0.0001);
+}
 }
