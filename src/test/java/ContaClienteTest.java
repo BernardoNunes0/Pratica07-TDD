@@ -176,4 +176,14 @@ class ContaClienteTest {
 
     assertEquals(100.0, conta.getSaldo(), 0.0001);
 }
+    @Test
+    void deveSubtrairSaqueDoSaldoERetornarNovoSaldo() {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+    ContaCliente conta = new ContaCliente(7, cliente, 100.0);
+
+    double novoSaldo = conta.subSaldo(40.0);
+
+    assertEquals(60.0, novoSaldo, 0.0001);
+    assertEquals(60.0, conta.getSaldo(), 0.0001);
+}
 }
