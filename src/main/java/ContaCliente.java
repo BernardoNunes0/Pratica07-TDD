@@ -76,7 +76,8 @@ public double addDeposito(double valor) {
    
 @Override
 public String toString() {
-    return cliente.getNome() + "(" + id + ") saldo=" + formatarSaldo();
+    String nome = cliente == null ? "Sem cliente" : cliente.getNome();
+    return nome + "(" + id + ") saldo=" + formatarSaldo();
 }
 
     
@@ -90,3 +91,4 @@ private String formatarSaldo() {
 
 }
     
+
