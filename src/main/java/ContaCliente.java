@@ -1,3 +1,4 @@
+
 public class ContaCliente {
     private final int id;
     private double saldo = 0.0;
@@ -41,4 +42,51 @@ public class ContaCliente {
     this.cliente = cliente;
     setSaldo(saldo);
 }
+   
+public double addDeposito(double valor) {
+    if (valor < 0) {
+        throw new IllegalArgumentException(
+                "O deposito nao pode ser negativo.");
+    }
+
+    setSaldo(getSaldo() + valor);
+
+    System.out.println("Novo saldo: " + formatarSaldo());
+
+    return getSaldo();
 }
+
+   
+    public double subSaldo(double valor) {
+    if (valor < 0 || Double.isNaN(valor)
+            || Double.isInfinite(valor)) {
+        throw new IllegalArgumentException(
+                "O saque deve ser finito e nao negativo.");
+    }
+
+    if (valor > getSaldo()) {
+        System.out.println("Saldo insuficiente!");
+        return getSaldo();
+    }
+
+    setSaldo(getSaldo() - valor);
+    return getSaldo();
+}
+
+   
+@Override
+public String toString() {
+    return cliente.getNome() + "(" + id + ") saldo=" + formatarSaldo();
+}
+
+    
+private String formatarSaldo() {
+    return String.format(
+            java.util.Locale.US,
+            "R$%.2f",
+            getSaldo());
+}
+
+
+}
+    
