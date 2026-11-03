@@ -266,5 +266,16 @@ void deveRejeitarSaqueNaoFinitoSemAlterarSaldo(double valor) {
 
     assertEquals(100.0, conta.getSaldo(), 0.0001);
 }
+    
+@Test
+void deveExibirDadosDaContaNoToString() {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+    ContaCliente conta = new ContaCliente(7, cliente, 100.0);
+
+    String resultado = conta.toString();
+
+    assertEquals("Ana(7) saldo=R$100.00", resultado);
+}
+
 
 }
