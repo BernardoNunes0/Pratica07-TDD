@@ -1,0 +1,109 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+class ContaClienteTest {
+
+    @Test
+    void deveGuardarIdDaConta() {
+        ContaCliente conta = new ContaCliente(1);
+
+        assertEquals(1, conta.getId());
+}
+
+    @Test
+    void deveIniciarComSaldoZero() {
+    ContaCliente conta = new ContaCliente(1);
+
+    assertEquals(0.0, conta.getSaldo(), 0.0001);
+}
+
+    @Test
+    void deveCriarContaComClienteESaldoInformado() {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+
+    ContaCliente conta = new ContaCliente(7, cliente, 150.0);
+
+    assertEquals(7, conta.getId());
+    assertEquals(cliente, conta.getCliente());
+    assertEquals(150.0, conta.getSaldo(), 0.0001);
+}
+
+    @Test
+    void deveCriarContaComClienteESaldoZero() {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+
+    ContaCliente conta = new ContaCliente(7, cliente);
+
+    assertEquals(7, conta.getId());
+    assertEquals(cliente, conta.getCliente());
+    assertEquals(0.0, conta.getSaldo(), 0.0001);
+}
+
+    @Test
+    void devePermitirDefinirETrocarCliente() {
+    ContaCliente conta = new ContaCliente(7);
+    Cliente ana = new Cliente(1, "Ana", 10);
+    Cliente bruno = new Cliente(2, "Bruno", 20);
+
+    conta.setCliente(ana);
+    assertEquals(ana, conta.getCliente());
+
+    conta.setCliente(bruno);
+    assertEquals(bruno, conta.getCliente());
+}   
+
+    @Test
+    void devePermitirAlterarSaldoInclusiveParaZero() {
+    ContaCliente conta = new ContaCliente(7);
+
+    conta.setSaldo(250.50);
+    assertEquals(250.50, conta.getSaldo(), 0.0001);
+
+    conta.setSaldo(0.0);
+    assertEquals(0.0, conta.getSaldo(), 0.0001);
+}   
+
+    @Test
+    void deveRejeitarSaldoNegativoSemAlterarSaldoAnterior() {
+    ContaCliente conta =
+            new ContaCliente(7, new Cliente(1, "Ana", 10), 100.0);
+
+    assertThrows(IllegalArgumentException.class,
+            () -> conta.setSaldo(-1.0));
+
+    assertEquals(100.0, conta.getSaldo(), 0.0001);
+}
+
+    @ParameterizedTest
+    @ValueSource(doubles = {
+    Double.NaN,
+    Double.POSITIVE_INFINITY,
+    Double.NEGATIVE_INFINITY
+    })
+    void deveRejeitarSaldoNaoFinitoSemAlterarSaldoAnterior(double valor) {
+    ContaCliente conta =
+            new ContaCliente(7, new Cliente(1, "Ana", 10), 100.0);
+
+    assertThrows(IllegalArgumentException.class,
+            () -> conta.setSaldo(valor));
+
+    assertEquals(100.0, conta.getSaldo(), 0.0001);
+}
+
+    @ParameterizedTest
+    @ValueSource(doubles = {
+    -1.0,
+    Double.NaN,
+    Double.POSITIVE_INFINITY,
+    Double.NEGATIVE_INFINITY
+    })
+    void deveRejeitarSaldoInvalidoNoConstrutor(double saldo) {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+
+    assertThrows(IllegalArgumentException.class,
+            () -> new ContaCliente(7, cliente, saldo));
+}
+}
