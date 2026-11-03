@@ -9,4 +9,11 @@ class ContaClienteTest {
 
         assertEquals(1, conta.getId());
     }
+    
+    @Test
+void deveIniciarComSaldoZero() {
+    ContaCliente conta = new ContaCliente(1);
+
+    assertEquals(0.0, conta.getSaldo(), 0.0001);
+}
 }
