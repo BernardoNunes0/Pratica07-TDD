@@ -292,4 +292,22 @@ void deveExibirSaldoAtualizadoNoToString() {
 }
 
 
+    @Test
+    void contaSemCliente() {
+        ContaCliente conta = new ContaCliente(7);
+        assertEquals("Sem cliente(7) saldo=R$0.00", conta.toString());
+    }
+
+    @Test
+    void contaSemClienteComSaldo() {
+        ContaCliente conta = new ContaCliente(7, null, 125.50);
+        assertEquals("Sem cliente(7) saldo=R$125.50", conta.toString());
+    }
+
+    @Test
+    void contaDepoisDeRemoverCliente() {
+        ContaCliente conta = new ContaCliente(7, new Cliente(1, "Ana", 10), 100.0);
+        conta.setCliente(null);
+        assertEquals("Sem cliente(7) saldo=R$100.00", conta.toString());
+    }
 }
