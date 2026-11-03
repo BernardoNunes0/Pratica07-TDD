@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class ContaClienteTest {
 
@@ -71,6 +73,22 @@ class ContaClienteTest {
 
     assertThrows(IllegalArgumentException.class,
             () -> conta.setSaldo(-1.0));
+
+    assertEquals(100.0, conta.getSaldo(), 0.0001);
+    }
+
+    @ParameterizedTest
+    @ValueSource(doubles = {
+    Double.NaN,
+    Double.POSITIVE_INFINITY,
+    Double.NEGATIVE_INFINITY
+    })
+    void deveRejeitarSaldoNaoFinitoSemAlterarSaldoAnterior(double valor) {
+    ContaCliente conta =
+            new ContaCliente(7, new Cliente(1, "Ana", 10), 100.0);
+
+    assertThrows(IllegalArgumentException.class,
+            () -> conta.setSaldo(valor));
 
     assertEquals(100.0, conta.getSaldo(), 0.0001);
     }
