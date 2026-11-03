@@ -59,6 +59,7 @@ public class ContaCliente {
 }
     public double subSaldo(double valor) {
     if (valor > getSaldo()) {
+        System.out.println("Saldo insuficiente!");
         return getSaldo();
     }
 
