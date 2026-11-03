@@ -1,3 +1,4 @@
+
 public class ContaCliente {
     private final int id;
     private double saldo = 0.0;
@@ -43,6 +44,12 @@ public class ContaCliente {
 }
     public double addDeposito(double valor) {
     setSaldo(getSaldo() + valor);
+
+    System.out.printf(
+            java.util.Locale.US,
+            "Novo saldo: R$%.2f%n",
+            getSaldo());
+
     return getSaldo();
 }
 }
