@@ -38,4 +38,17 @@ class ContaClienteTest {
     assertEquals(cliente, conta.getCliente());
     assertEquals(0.0, conta.getSaldo(), 0.0001);
     }
+
+    @Test
+    void devePermitirDefinirETrocarCliente() {
+    ContaCliente conta = new ContaCliente(7);
+    Cliente ana = new Cliente(1, "Ana", 10);
+    Cliente bruno = new Cliente(2, "Bruno", 20);
+
+    conta.setCliente(ana);
+    assertEquals(ana, conta.getCliente());
+
+    conta.setCliente(bruno);
+    assertEquals(bruno, conta.getCliente());
+    }   
 }
