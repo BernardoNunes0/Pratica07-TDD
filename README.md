@@ -1,51 +1,40 @@
-# Pratica07-TDD
+# Prática 07 - TDD e Git
 
-Bernardo Nunes Gomes
-Kauã Kellysson
-Lucas Medeiros
-Alvaro Vasconcelos
+Projeto em Java 8, com Maven e JUnit 5.
 
-## Parte FaturaCliente
+## Grupo
 
-Esta branch entrega somente `FaturaCliente` e `FaturaClienteTest`.
-`Cliente` e `ContaCliente` ficam para os demais integrantes.
+- Bernardo Nunes Gomes
+- Kauã Kellysson
+- Lucas Medeiros
+- Alvaro Vasconcelos
 
-- Java 8, Maven e JUnit 5.
-- Classes sem declaração de `package`, em `src/main/java`.
-- Testes em `src/test/java`.
-- Histórico com commits `RED:`, `GREEN:` e `REFACTOR:`.
+## Classes
 
-### Integração com Cliente
+- `Cliente`: dados do cliente e desconto.
+- `FaturaCliente`: valor da fatura e cálculo do desconto.
+- `ContaCliente`: saldo, depósito e saque.
 
-A classe `Cliente` ainda precisa ser adicionada pelo grupo em
-`src/main/java/Cliente.java`, com os métodos do diagrama. Os testes de fatura
-usam `Cliente(int, String, int)`, `getDesconto()`, `setDesconto(int)` e
-`toString()` no formato `Nome(id)(desconto%)`.
+Cada classe tem seus testes em `src/test/java`.
 
-Depois da integração, executar:
+## Rodar os testes
+
+Com Java 8 e Maven instalados, rode na pasta do projeto:
 
 ```sh
 mvn clean test
 ```
 
-Antes de integrar `Cliente`, o projeto desta branch não compila sozinho.
-A verificação isolada de `FaturaCliente` passou em Java 8 com 23 execuções de
-teste e zero falhas, usando uma classe Cliente temporária apenas no ambiente
-local. Essa classe de apoio não foi incluída na entrega; os testes devem ser
-reexecutados com a implementação real do grupo antes do merge.
+São 69 testes passando com as três classes juntas.
 
-### Comportamentos definidos para FaturaCliente
+A conta criada só com id começa sem cliente e com saldo zero.
+Nesse caso, o `toString()` mostra `Sem cliente(7) saldo=R$0.00`, usando o id da conta.
+Se tentar sacar mais que o saldo, aparece um aviso e o saldo não muda.
 
-- O construtor somente com id inicia com cliente nulo e valor zero.
-- O construtor completo e `setCliente` rejeitam cliente nulo.
-- `setValor` e o construtor completo rejeitam valor negativo, NaN e infinito.
-- Sem cliente, `getValorComDesconto` lança `IllegalStateException`.
-- O cálculo consulta o desconto atual, sem alterar o valor original e sem
-  arredondar. A validação da faixa de desconto pertence a `Cliente`.
-- `toString` segue o formato do diagrama e permite exibir uma fatura ainda
-  sem cliente, mostrando `cliente=null`.
+## Git
 
-O enunciado não detalha esses casos de erro; essas convenções estão cobertas
-pelos testes e podem ser alinhadas pelo grupo na revisão.
+As alterações vão em uma branch e entram na main por Pull Request,
+com aprovação de outro integrante antes do merge.
 
-O Pull Request deve ser revisado por outro integrante antes de entrar na main.
+Para mudanças de comportamento, primeiro vem o teste (`RED:`), depois
+o código (`GREEN:`). Se precisar refatorar, usamos `REFACTOR:`.
