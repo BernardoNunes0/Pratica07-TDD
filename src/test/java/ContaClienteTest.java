@@ -239,5 +239,16 @@ void devePermitirSacarTodoSaldoDisponivel() {
     assertEquals(0.0, saldoAposSaque, 0.0001);
     assertEquals(0.0, conta.getSaldo(), 0.0001);
 }
+    
+@Test
+void deveManterSaldoAoSacarZero() {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+    ContaCliente conta = new ContaCliente(7, cliente, 100.0);
+
+    double saldoAposSaque = conta.subSaldo(0.0);
+
+    assertEquals(100.0, saldoAposSaque, 0.0001);
+    assertEquals(100.0, conta.getSaldo(), 0.0001);
+}
 
 }
