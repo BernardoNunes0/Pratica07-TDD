@@ -43,6 +43,11 @@ public class ContaCliente {
     setSaldo(saldo);
 }
     public double addDeposito(double valor) {
+    if (valor < 0) {
+        throw new IllegalArgumentException(
+                "O deposito nao pode ser negativo.");
+    }
+
     setSaldo(getSaldo() + valor);
 
     System.out.printf(
@@ -53,3 +58,4 @@ public class ContaCliente {
     return getSaldo();
 }
 }
+    
