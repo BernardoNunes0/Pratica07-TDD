@@ -11,14 +11,14 @@ class ContaClienteTest {
         ContaCliente conta = new ContaCliente(1);
 
         assertEquals(1, conta.getId());
-    }
+}
 
     @Test
     void deveIniciarComSaldoZero() {
     ContaCliente conta = new ContaCliente(1);
 
     assertEquals(0.0, conta.getSaldo(), 0.0001);
-    }
+}
 
     @Test
     void deveCriarContaComClienteESaldoInformado() {
@@ -29,7 +29,7 @@ class ContaClienteTest {
     assertEquals(7, conta.getId());
     assertEquals(cliente, conta.getCliente());
     assertEquals(150.0, conta.getSaldo(), 0.0001);
-    }
+}
 
     @Test
     void deveCriarContaComClienteESaldoZero() {
@@ -40,7 +40,7 @@ class ContaClienteTest {
     assertEquals(7, conta.getId());
     assertEquals(cliente, conta.getCliente());
     assertEquals(0.0, conta.getSaldo(), 0.0001);
-    }
+}
 
     @Test
     void devePermitirDefinirETrocarCliente() {
@@ -53,7 +53,7 @@ class ContaClienteTest {
 
     conta.setCliente(bruno);
     assertEquals(bruno, conta.getCliente());
-    }   
+}   
 
     @Test
     void devePermitirAlterarSaldoInclusiveParaZero() {
@@ -64,7 +64,7 @@ class ContaClienteTest {
 
     conta.setSaldo(0.0);
     assertEquals(0.0, conta.getSaldo(), 0.0001);
-    }   
+}   
 
     @Test
     void deveRejeitarSaldoNegativoSemAlterarSaldoAnterior() {
@@ -75,7 +75,7 @@ class ContaClienteTest {
             () -> conta.setSaldo(-1.0));
 
     assertEquals(100.0, conta.getSaldo(), 0.0001);
-    }
+}
 
     @ParameterizedTest
     @ValueSource(doubles = {
@@ -91,5 +91,19 @@ class ContaClienteTest {
             () -> conta.setSaldo(valor));
 
     assertEquals(100.0, conta.getSaldo(), 0.0001);
-    }
+}
+
+    @ParameterizedTest
+    @ValueSource(doubles = {
+    -1.0,
+    Double.NaN,
+    Double.POSITIVE_INFINITY,
+    Double.NEGATIVE_INFINITY
+    })
+    void deveRejeitarSaldoInvalidoNoConstrutor(double saldo) {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+
+    assertThrows(IllegalArgumentException.class,
+            () -> new ContaCliente(7, cliente, saldo));
+}
 }
