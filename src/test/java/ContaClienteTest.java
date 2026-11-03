@@ -276,6 +276,20 @@ void deveExibirDadosDaContaNoToString() {
 
     assertEquals("Ana(7) saldo=R$100.00", resultado);
 }
+    
+@Test
+void deveExibirSaldoAtualizadoNoToString() {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+    ContaCliente conta = new ContaCliente(7, cliente, 100.0);
+
+    conta.addDeposito(50.0);
+
+    assertEquals("Ana(7) saldo=R$150.00", conta.toString());
+
+    conta.subSaldo(30.0);
+
+    assertEquals("Ana(7) saldo=R$120.00", conta.toString());
+}
 
 
 }
