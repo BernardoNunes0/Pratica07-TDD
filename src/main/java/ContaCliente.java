@@ -23,6 +23,10 @@ public class ContaCliente {
     return cliente;
     }
 
+    public void setCliente(Cliente cliente) {
+    this.cliente = cliente;
+    }
+
     public ContaCliente(int id, Cliente cliente, double saldo) {
     this(id);
     this.cliente = cliente;
