@@ -196,4 +196,26 @@ void deveManterSaldoQuandoSaqueForMaiorQueSaldoDisponivel() {
     assertEquals(100.0, saldoAposSaque, 0.0001);
     assertEquals(100.0, conta.getSaldo(), 0.0001);
 }
+    @Test
+    void deveAvisarQuandoSaldoForInsuficiente() {
+    Cliente cliente = new Cliente(1, "Ana", 10);
+    ContaCliente conta = new ContaCliente(7, cliente, 100.0);
+
+    ByteArrayOutputStream saida = new ByteArrayOutputStream();
+    PrintStream saidaOriginal = System.out;
+    PrintStream captura = new PrintStream(saida);
+
+    try {
+        System.setOut(captura);
+
+        conta.subSaldo(150.0);
+
+        captura.flush();
+        assertEquals("Saldo insuficiente!",
+                saida.toString().trim());
+    } finally {
+        System.setOut(saidaOriginal);
+        captura.close();
+    }
+}
 }
